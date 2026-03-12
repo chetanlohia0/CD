@@ -77,3 +77,129 @@ Output:
 Enter an arithmetic expression:
 5 + 3 * 2
 Result: 11
+
+
+
+
+
+
+
+
+
+
+/* Bison file: calc.y */
+
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>     /* NEW: needed for sin, cos, log etc */
+
+void yyerror(const char *s);
+int yylex();
+%}
+
+/* precedence */
+%left '+' '-'
+%left '*' '/'
+%right UMINUS
+
+/* tokens */
+%token NUMBER
+%token SIN COS LOG POW EXP   /* NEW TOKENS */
+
+%%
+
+equation:
+expression '\n' { printf("Result: %lf\n", $1); }
+;
+
+expression:
+
+expression '+' expression { $$ = $1 + $3; }
+| expression '-' expression { $$ = $1 - $3; }
+| expression '*' expression { $$ = $1 * $3; }
+| expression '/' expression { $$ = $1 / $3; }
+
+| '-' expression %prec UMINUS { $$ = -$2; }
+
+| '(' expression ')' { $$ = $2; }
+
+| NUMBER { $$ = $1; }
+
+/* -------- NEW CALCULATOR FUNCTIONS -------- */
+
+| SIN '(' expression ')' { $$ = sin($3); }
+
+| COS '(' expression ')' { $$ = cos($3); }
+
+| LOG '(' expression ')' { $$ = log($3); }
+
+| EXP '(' expression ')' { $$ = exp($3); }
+
+| POW '(' expression ',' expression ')' { $$ = pow($3,$5); }
+
+;
+
+%%
+
+void yyerror(const char *s)
+{
+    printf("Error: %s\n", s);
+}
+
+int main()
+{
+    printf("Enter expression:\n");
+    yyparse();
+    return 0;
+}
+
+
+
+
+
+
+
+
+%{
+#include "calc.tab.h"
+#include <stdio.h>
+#include <stdlib.h>
+%}
+
+%%
+
+sin     { return SIN; }        /* NEW */
+cos     { return COS; }        /* NEW */
+log     { return LOG; }        /* NEW */
+pow     { return POW; }        /* NEW */
+exp     { return EXP; }        /* NEW */
+
+[0-9]+(\.[0-9]+)?   { yylval = atof(yytext); return NUMBER; }
+
+[+\-*/(),]  { return yytext[0]; }
+
+[ \t]   { }
+
+\n      { return '\n'; }
+
+. { printf("Invalid character: %s\n", yytext); }
+
+%%
+
+int yywrap()
+{
+return 1;
+}
+
+
+
+
+
+flex calc.l
+bison -d calc.y
+gcc calc.tab.c lex.yy.c -o calc -lm
+./calc
+
+
+
