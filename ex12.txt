@@ -1,0 +1,13 @@
+Enter number of three address statements: 3
+Enter statement 1: t=a+b
+LOAD a
+ADD b
+STORE t
+Enter statement 2: u=t*c
+LOAD t
+MUL c
+STORE u
+Enter statement 3: v=u-d
+LOAD u
+SUB d
+STORE v

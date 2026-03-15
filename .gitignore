@@ -1,0 +1,11 @@
+.git-credentials
+.bash_history
+.jupyter/
+.local/
+.bashrc
+.gitconfig
+.profile
+.viminfo
+.ipynb_checkpoints
+*.swp
+

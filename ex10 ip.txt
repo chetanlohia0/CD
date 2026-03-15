@@ -1,0 +1,42 @@
+Enter number of productions: 3
+Enter productions (e.g., S->AA):
+S->AA
+A->aA
+A->b
+
+Augmented Grammar:
+S' -> S
+S -> AA
+A -> aA
+A -> b
+
+LR(0) Item Sets:
+
+I0:
+A->.aA
+A->.b
+S'->.S
+S->.AA
+
+I1:
+A->.aA
+A->.b
+S->A.A
+
+I2:
+S'->S.
+
+I3:
+A->.aA
+A->.b
+A->a.A
+
+I4:
+A->b.
+
+I5:
+S->AA.
+
+I6:
+A->aA.
+jupyter-ra2311026011020@cintel:~$ 
