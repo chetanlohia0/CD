@@ -1,0 +1,68 @@
+jupyter-ra2311026011020@cintel:~$ ./a.out
+Use '#' for epsilon
+One production per line (A=alpha)
+
+Enter number of productions: 6
+Enter productions:
+S=aCd
+S=aT
+C=a
+C=ab
+T=ccd
+T=ddc
+Conflict at M[S,a]
+Conflict at M[C,a]
+
+FIRST Sets:
+FIRST(C) = { a }
+FIRST(S) = { a }
+FIRST(T) = { c d }
+
+FOLLOW Sets:
+FOLLOW(C) = { d }
+FOLLOW(S) = { $ }
+FOLLOW(T) = { $ }
+
+PREDICTIVE PARSING TABLE
+
+                   a         d         b         c         $
+         C      C=ab         -         -         -         -
+         S      S=aT         -         -         -         -
+         T         -     T=ddc         -     T=ccd         -
+jupyter-ra2311026011020@cintel:~$ ./a.out
+Use '#' for epsilon
+One production per line (A=alpha)
+
+Enter number of productions: 8
+Enter productions:
+E=TR
+R=+TR
+R=#
+T=FY
+Y=*FY
+Y=#
+F=(E)
+F=i^[[C^[[D
+
+FIRST Sets:
+FIRST(E) = { ( i }
+FIRST(F) = { ( i }
+FIRST(R) = { + # }
+FIRST(T) = { ( i }
+FIRST(Y) = { * # }
+
+FOLLOW Sets:
+FOLLOW(E) = { $ ) }
+FOLLOW(F) = { * + $ ) }
+FOLLOW(R) = { $ ) }
+FOLLOW(T) = { + $ ) }
+FOLLOW(Y) = { + $ ) }
+
+PREDICTIVE PARSING TABLE
+
+                   +         *         (         )         i                  $
+         E         -         -      E=TR         -      E=TR         -         -         -
+         F         -         -     F=(E)         - F=i         -         -         -
+         R     R=+TR         -         -         -         -         -         -         -
+         T         -         -      T=FY         -      T=FY         -         -         -
+         Y         -     Y=*FY      

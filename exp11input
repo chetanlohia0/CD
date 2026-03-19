@@ -1,0 +1,4 @@
+Enter number of statements: 3
+Enter statement 1: t=a+b
+Enter statement 2: u=t*c
+Enter statement 3: v=u-d
